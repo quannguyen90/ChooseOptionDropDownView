@@ -40,7 +40,14 @@ public class ChooseOptionBottomDropdownView: UIView {
     public var getNumberSection:(() -> Int)?
     public var getNumberItemInSection:((_ section: Int) -> Int)?
     public var didChangeTextSearch: ((_ textSearch: String?) -> ())?
+    public var scrollToEnd: (() -> ())?
 
+    public var willShow: ((_ view: ChooseOptionBottomDropdownView) -> ())?
+    public var didShow: ((_ view: ChooseOptionBottomDropdownView) -> ())?
+    public var willHide: ((_ view: ChooseOptionBottomDropdownView) -> ())?
+    public var didHide: ((_ view: ChooseOptionBottomDropdownView) -> ())?
+
+    
     @IBOutlet weak var viewSearch: UIView!
     @IBOutlet weak var labelTitleView: UILabel!
     @IBOutlet weak var tableView: UITableView!
@@ -91,7 +98,6 @@ public class ChooseOptionBottomDropdownView: UIView {
         }
         
         cTraintBottom.constant = UIApplication.bottomMargin
-//        cTraintHeight.constant = CGFloat.greatestFiniteMagnitude
         tableView.reloadData()
         tableView.layoutIfNeeded()
         let height = tableView.contentSize.height
@@ -175,6 +181,32 @@ public class ChooseOptionBottomDropdownView: UIView {
     @IBAction func onTouchClose(_ sender: Any) {
         SwiftMessages.hide()
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+    }
+    
+    public func show() {
+        SwiftMessages.hide()
+        var config = SwiftMessages.Config()
+        config.duration = .forever
+        config.dimMode = .gray(interactive: true)
+        config.presentationStyle = .bottom
+        config.eventListeners.append { event in
+            if case .didHide = event {
+                IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+                self.didHide?(self)
+            } else if case .willHide = event {
+                self.willHide?(self)
+                IQKeyboardManager.shared.shouldResignOnTouchOutside = true
+                self.endEditing(true)
+            } else if case .willShow = event {
+                self.willShow?(self)
+            } else if case .didShow = event {
+                self.didShow?(self)
+            }
+        }
+
+        let kbTracking = KeyboardTrackingView()
+        config.keyboardTrackingView = kbTracking
+        SwiftMessages.show(config: config, view: self)
     }
     
 }

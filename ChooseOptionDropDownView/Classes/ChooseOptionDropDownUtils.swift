@@ -9,7 +9,7 @@ import Foundation
 import SwiftMessages
 import IQKeyboardManagerSwift
 
-public protocol DropDownItemSearchable: AnyObject {
+@objc public protocol DropDownItemSearchable: AnyObject {
     func getTextSearch() -> String
 }
 
@@ -52,7 +52,7 @@ extension ChooseOptionBottomDropdownView {
                                                                                  estimatedRowHeight: CGFloat = 50,
                                                                                  configCell: @escaping ((_ view: ChooseOptionBottomDropdownView,_ cell: UITableViewCell, _ data: T) -> ()),
                                                                                  didSelectRow:  ((_ indexPath: IndexPath, _ data: T)->())?,
-                                                                                 searchBlock:((_ txtSearch: String?)->[T])? = nil) {
+                                                                                 searchBlock:((_ txtSearch: String?)->[T])? = nil) -> ChooseOptionBottomDropdownView {
         var listDisplay = listAllData
         
         let view = ChooseOptionBottomDropdownView(title: title,
@@ -90,23 +90,12 @@ extension ChooseOptionBottomDropdownView {
             listDisplay = searchBlock?(text) ?? []
             view.reloadData(count: listDisplay.count, isSearching: true)
         }
-        
-        var config = SwiftMessages.Config()
-        config.duration = .forever
-        config.dimMode = .gray(interactive: true)
-        config.presentationStyle = .bottom
-        config.eventListeners.append { event in
-            if case .willHide = event {
-                IQKeyboardManager.shared.shouldResignOnTouchOutside = true
-                view.endEditing(true)
-            } else if case .didShow = event {
-                view.reloadData(count: listDisplay.count)
-            }
+        view.willShow = { _ in
+            view.reloadData(count: listDisplay.count)
         }
-
-        let kbTracking = KeyboardTrackingView()
-        config.keyboardTrackingView = kbTracking
-        SwiftMessages.show(config: config, view: view)
+        view.show()
+        
+        return view
     }
 
 
@@ -119,7 +108,7 @@ extension ChooseOptionBottomDropdownView {
                                                                           configCell: @escaping ((_ cell: UITableViewCell, _ data: T) -> ()),
                                                                           didSelectRow:  ((_ indexPath: IndexPath, _ data: T)->())?,
                                                                           searchBlock:((_ txtSearch: String?)->[T])? = nil,
-                                                                          didHide:(()->())? = nil) {
+                                                                          didHide:((_ view: ChooseOptionBottomDropdownView) -> ())? = nil) -> ChooseOptionBottomDropdownView {
         
         var listDisplay = listAllData
 
@@ -159,31 +148,13 @@ extension ChooseOptionBottomDropdownView {
             listDisplay = searchBlock?(text) ?? []
             view.reloadData(count: listDisplay.count, isSearching: true)
         }
-        
-        SwiftMessages.hide()
-        var config = SwiftMessages.Config()
-        config.duration = .forever
-        config.dimMode = .gray(interactive: true)
-        config.presentationStyle = .bottom
-        config.eventListeners.append { event in
-            if case .didHide = event {
-                IQKeyboardManager.shared.shouldResignOnTouchOutside = true
-                didHide?()
-            } else if case .willHide = event {
-                IQKeyboardManager.shared.shouldResignOnTouchOutside = true
-                view.endEditing(true)
-            } else if case .willShow = event {
-                view.reloadData(count: listDisplay.count)
-            }
-            
+        view.didHide = didHide
+        view.willShow = { _ in
+            view.reloadData(count: listDisplay.count)
         }
-
-        let kbTracking = KeyboardTrackingView()
-        config.keyboardTrackingView = kbTracking
-        SwiftMessages.show(config: config, view: view)
+        view.show()
+        return view
     }
-
-    
 
     public class func chooseOptionInBottomViewMultiLevel<T: DropDownItemSearchable>(listAllData:[OptionData<T>],
                                                                                     multipleSelection: Bool,
@@ -194,7 +165,7 @@ extension ChooseOptionBottomDropdownView {
                                                                                     configHeader: ((_ section: Int, _ data: OptionData<T>) -> (UIView?))? = nil,
                                                                                     configCell: @escaping ((_ cell: UITableViewCell, _ data: T) -> ()),
                                                                                     didSelectRow:  ((_ indexPath: IndexPath, _ data: T)->())?,
-                                                                                    searchBlock:((_ txtSearch: String?)->[OptionData<T>])? = nil) {
+                                                                                    searchBlock:((_ txtSearch: String?)->[OptionData<T>])? = nil) -> ChooseOptionBottomDropdownView {
 
         var listDisplay = listAllData
         let view = ChooseOptionBottomDropdownView(title: title,
@@ -215,13 +186,11 @@ extension ChooseOptionBottomDropdownView {
         view.getNumberSection = {
             return listDisplay.count
         }
-        
         view.heightHeader = heightHeader
         view.viewForHeaderAtSection = { (section) -> UIView? in
             let data = listDisplay[section]
             return configHeader?(section, data)
         }
-        
         view.didSelectRow = { indexPath in
             let data = listDisplay[indexPath.section]
             if let item = data.data?[indexPath.row] {
@@ -231,7 +200,6 @@ extension ChooseOptionBottomDropdownView {
                 SwiftMessages.hide()
             }
         }
-        
         view.didChangeTextSearch = {(text) in
             if searchBlock == nil {
                 if T.self == DropDownItem.self {
@@ -260,23 +228,11 @@ extension ChooseOptionBottomDropdownView {
             view.reloadData(count: listDisplay.count, isSearching: true)
         }
         
-        var config = SwiftMessages.Config()
-        config.duration = .forever
-        config.dimMode = .gray(interactive: true)
-        config.presentationStyle = .bottom
-        config.eventListeners.append { event in
-            if case .didHide = event {
-                IQKeyboardManager.shared.shouldResignOnTouchOutside = true
-            } else if case .willHide = event {
-                IQKeyboardManager.shared.shouldResignOnTouchOutside = true
-                view.endEditing(true)
-            } else if case .willShow = event {
-                view.reloadData(count: listDisplay.count)
-            }
+        view.willShow = { _ in
+            view.reloadData(count: listDisplay.count)
         }
-        let kbTracking = KeyboardTrackingView()
-        config.keyboardTrackingView = kbTracking
-        SwiftMessages.show(config: config, view: view)
+        view.show()
+        return view
     }
 
 
@@ -285,12 +241,12 @@ extension ChooseOptionBottomDropdownView {
                             title: String,
                             multiChoice: Bool = true,
                             checkmarkColor: UIColor = UIColor(red: 0.02, green: 0.376, blue: 0.651, alpha: 1),
-                            didChooseItem: @escaping ((_ item: DropDownItem)->())) {
+                            didChooseItem: @escaping ((_ item: DropDownItem)->())) -> ChooseOptionBottomDropdownView {
         let items = listDropDown
         for item in items {
             item.isSelected = selectedPreviousId == item.id
         }
-        chooseOptionInBottomView(listAllData: items,
+        let view = chooseOptionInBottomView(listAllData: items,
                                  multipleSelection: false,
                                  title: title,
                                  cellName: "DropDownItemCell",
@@ -318,6 +274,7 @@ extension ChooseOptionBottomDropdownView {
             }
         }
      
+        return view
+    
     }
-
 }
