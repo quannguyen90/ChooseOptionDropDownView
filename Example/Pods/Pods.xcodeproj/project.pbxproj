@@ -1294,40 +1294,6 @@
 			};
 			name = Release;
 		};
-		50D5D8F1391BA2E2C5BC87C656986BD4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = ADC5F8B790583CDB22516180B530E7E9 /* ChooseOptionDropDownView.debug.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGNING_ALLOWED = NO;
-				CODE_SIGNING_REQUIRED = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				EXPANDED_CODE_SIGN_IDENTITY = "";
-				GCC_PREFIX_HEADER = "Target Support Files/ChooseOptionDropDownView/ChooseOptionDropDownView-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/ChooseOptionDropDownView/ChooseOptionDropDownView-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/ChooseOptionDropDownView/ChooseOptionDropDownView.modulemap";
-				PRODUCT_MODULE_NAME = ChooseOptionDropDownView;
-				PRODUCT_NAME = ChooseOptionDropDownView;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		5E03B1E0F1B616F715A13A9CC3C05625 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 707A03337FF163FBE11CFD01E4CD106F /* Pods-ChooseOptionDropDownView_Example.debug.xcconfig */;
@@ -1421,6 +1387,40 @@
 				MODULEMAP_FILE = "Target Support Files/IQKeyboardManagerSwift/IQKeyboardManagerSwift.modulemap";
 				PRODUCT_MODULE_NAME = IQKeyboardManagerSwift;
 				PRODUCT_NAME = IQKeyboardManagerSwift;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		6B26B6A36EF5E51161EAC72BB4CCA540 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = ADC5F8B790583CDB22516180B530E7E9 /* ChooseOptionDropDownView.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EXPANDED_CODE_SIGN_IDENTITY = "";
+				GCC_PREFIX_HEADER = "Target Support Files/ChooseOptionDropDownView/ChooseOptionDropDownView-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ChooseOptionDropDownView/ChooseOptionDropDownView-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/ChooseOptionDropDownView/ChooseOptionDropDownView.modulemap";
+				PRODUCT_MODULE_NAME = ChooseOptionDropDownView;
+				PRODUCT_NAME = ChooseOptionDropDownView;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
@@ -1564,41 +1564,6 @@
 			};
 			name = Release;
 		};
-		C7CF753CEFBBBC8EF35955DD29528FF4 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1B8FF0D03A2B04A53CF55D1BAF3286BA /* ChooseOptionDropDownView.release.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGNING_ALLOWED = NO;
-				CODE_SIGNING_REQUIRED = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				EXPANDED_CODE_SIGN_IDENTITY = "";
-				GCC_PREFIX_HEADER = "Target Support Files/ChooseOptionDropDownView/ChooseOptionDropDownView-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/ChooseOptionDropDownView/ChooseOptionDropDownView-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/ChooseOptionDropDownView/ChooseOptionDropDownView.modulemap";
-				PRODUCT_MODULE_NAME = ChooseOptionDropDownView;
-				PRODUCT_NAME = ChooseOptionDropDownView;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		C80D9F8BA523C9E4EC8CC8A20BA804D4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 240539A5D4847A5CE16387269832776B /* SwiftMessages.debug.xcconfig */;
@@ -1684,6 +1649,41 @@
 			};
 			name = Debug;
 		};
+		FC4CE2368C8A9C952290B9EFB638AE99 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1B8FF0D03A2B04A53CF55D1BAF3286BA /* ChooseOptionDropDownView.release.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGNING_REQUIRED = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EXPANDED_CODE_SIGN_IDENTITY = "";
+				GCC_PREFIX_HEADER = "Target Support Files/ChooseOptionDropDownView/ChooseOptionDropDownView-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/ChooseOptionDropDownView/ChooseOptionDropDownView-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/ChooseOptionDropDownView/ChooseOptionDropDownView.modulemap";
+				PRODUCT_MODULE_NAME = ChooseOptionDropDownView;
+				PRODUCT_NAME = ChooseOptionDropDownView;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1726,8 +1726,8 @@
 		704F0EA484FD8E4F5F1C3A2F75F3FF80 /* Build configuration list for PBXNativeTarget "ChooseOptionDropDownView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				50D5D8F1391BA2E2C5BC87C656986BD4 /* Debug */,
-				C7CF753CEFBBBC8EF35955DD29528FF4 /* Release */,
+				6B26B6A36EF5E51161EAC72BB4CCA540 /* Debug */,
+				FC4CE2368C8A9C952290B9EFB638AE99 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

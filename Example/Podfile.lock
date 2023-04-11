@@ -1,5 +1,5 @@
 PODS:
-  - ChooseOptionDropDownView (1.0.1):
+  - ChooseOptionDropDownView (1.1.0):
     - IQKeyboardManagerSwift (~> 6.3.0)
     - SwiftMessages (~> 9.0.6)
   - IQKeyboardManagerSwift (6.3.0)
@@ -20,7 +20,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  ChooseOptionDropDownView: 6d07512723f3c7b14ebc3ee7a7eb60b41118f5ed
+  ChooseOptionDropDownView: 0d70d236c01d5a3233b61cef64191d0cd60c901b
   IQKeyboardManagerSwift: a8228c257614af98743b4cd8584637025f36358f
   SwiftMessages: f0c7ef4705a570ad6c5e208b611f4333e660ed92
 
