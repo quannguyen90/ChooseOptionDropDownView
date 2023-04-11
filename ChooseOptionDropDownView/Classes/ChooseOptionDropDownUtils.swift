@@ -14,9 +14,15 @@ import IQKeyboardManagerSwift
 }
 
 public class OptionData<T: DropDownItemSearchable> {
-    var name: String?
-    var id: String?
-    var data: [T]?
+    public var name: String?
+    public var id: String?
+    public var data: [T]?
+    
+    public init(name: String? = nil, id: String? = nil, data: [T]? = nil) {
+        self.name = name
+        self.id = id
+        self.data = data
+    }
 }
 
 
@@ -165,11 +171,20 @@ extension ChooseOptionBottomDropdownView {
                                                                                     configHeader: ((_ section: Int, _ data: OptionData<T>) -> (UIView?))? = nil,
                                                                                     configCell: @escaping ((_ cell: UITableViewCell, _ data: T) -> ()),
                                                                                     didSelectRow:  ((_ indexPath: IndexPath, _ data: T)->())?,
-                                                                                    searchBlock:((_ txtSearch: String?)->[OptionData<T>])? = nil) -> ChooseOptionBottomDropdownView {
+                                                                                    searchBlock:((_ txtSearch: String?)->[OptionData<T>])? = nil, didHide:((_ view: ChooseOptionBottomDropdownView) -> ())? = nil) -> ChooseOptionBottomDropdownView {
 
-        var listDisplay = listAllData
+        var listDisplay = listAllData.filter({($0.data?.count ?? 0) > 0})
+        let allItem = listAllData.reduce([]) { rs, op -> [T] in
+            if let data = op.data {
+                var newRs = rs
+                newRs.append(contentsOf: data)
+                return newRs
+            }
+            
+            return rs
+        }
         let view = ChooseOptionBottomDropdownView(title: title,
-                                                  isShowSearch: listDisplay.count > 10,
+                                                  isShowSearch: allItem.count > 10,
                                                   cellName: cellName,
                                                   cellBundle: cellBundle) {
             return listDisplay.count
@@ -189,8 +204,21 @@ extension ChooseOptionBottomDropdownView {
         view.heightHeader = heightHeader
         view.viewForHeaderAtSection = { (section) -> UIView? in
             let data = listDisplay[section]
-            return configHeader?(section, data)
+            if configHeader != nil {
+                return configHeader?(section, data)
+            } else {
+                let view = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: heightHeader))
+                let label = UILabel(frame: CGRect(x: 15, y: 0, width: 300, height: heightHeader))
+                label.text = data.name
+                label.textColor = UIColor(red: 0.387, green: 0.387, blue: 0.387, alpha: 1)
+                label.font = UIFont(name: "SanFranciscoDisplay-Regular", size: 14)
+                view.addSubview(label)
+                view.backgroundColor = UIColor(red: 0.962, green: 0.962, blue: 0.962, alpha: 1)
+                return view
+            }
         }
+        
+        // DID SELECT ROW
         view.didSelectRow = { indexPath in
             let data = listDisplay[indexPath.section]
             if let item = data.data?[indexPath.row] {
@@ -200,26 +228,24 @@ extension ChooseOptionBottomDropdownView {
                 SwiftMessages.hide()
             }
         }
+        
+        // SEARCH
         view.didChangeTextSearch = {(text) in
             if searchBlock == nil {
-                if T.self == DropDownItem.self {
-                    if let txt = text?.lowercased().removeSignVietnamese(), !txt.isEmpty {
-                        var listItem = [OptionData<T>]()
-                        listAllData.forEach { data in
-                            if let items = data.data?.filter({($0 as? DropDownItem)?.getTextSearch().lowercased().removeSignVietnamese().contains(txt) ?? false}), items.count > 0 {
-                                let option = OptionData<T>()
-                                option.data = items
-                                option.name = data.name
-                                option.id = data.id
-                                listItem.append(option)
-                            }
+                if let txt = text?.lowercased().removeSignVietnamese(), !txt.isEmpty {
+                    var listItem = [OptionData<T>]()
+                    listAllData.forEach { data in
+                        if let items = data.data?.filter({$0.getTextSearch().lowercased().removeSignVietnamese().contains(txt) ?? false}), items.count > 0 {
+                            let option = OptionData<T>()
+                            option.data = items
+                            option.name = data.name
+                            option.id = data.id
+                            listItem.append(option)
                         }
-                        listDisplay = listItem
-                    } else {
-                        listDisplay = listAllData
                     }
+                    listDisplay = listItem.filter({$0.data?.count ?? 0 > 0})
                 } else {
-                    listDisplay = listAllData
+                    listDisplay = listAllData.filter({($0.data?.count ?? 0) > 0})
                 }
                 
             } else {
@@ -232,6 +258,7 @@ extension ChooseOptionBottomDropdownView {
             view.reloadData(count: listDisplay.count)
         }
         view.show()
+        view.didHide = didHide
         return view
     }
 

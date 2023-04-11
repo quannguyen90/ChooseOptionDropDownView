@@ -135,6 +135,11 @@ public class ChooseOptionBottomDropdownView: UIView {
         let nib = UINib(nibName: cellName, bundle: cellBundle)
         tableView.register(nib, forCellReuseIdentifier: getCellReuseIdentifier())
         tableView.tableFooterView = UIView()
+        if #available(iOS 15.0, *) {
+            tableView.sectionHeaderTopPadding = 0
+        } else {
+            // Fallback on earlier versions
+        }
         
         labelTitleView.textColor = UIColor(red: 0.212, green: 0.212, blue: 0.212, alpha: 1)
         labelTitleView.font = UIFont(name: "SanFranciscoDisplay-Semibold", size: 17)

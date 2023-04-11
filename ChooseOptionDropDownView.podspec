@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ChooseOptionDropDownView'
-  s.version          = '1.0.1'
+  s.version          = '1.1.0'
   s.summary          = 'A short description of ChooseOptionDropDownView.'
 
 # This description is used to generate tags and improve search results.
@@ -30,8 +30,9 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '10.0'
 
-  s.source_files = 'ChooseOptionDropDownView/Classes/**/*'
-  
+  s.source_files = 'ChooseOptionDropDownView/Classes/**/*'  
+  s.resources = ["ChooseOptionDropDownView/Fonts/*.{OTF,ttf}", 'ChooseOptionDropDownView/Assets/**/*.{png,pdf}']
+
   # s.resource_bundles = {
   #   'ChooseOptionDropDownView' => ['ChooseOptionDropDownView/Assets/*.png']
   # }
